@@ -1,0 +1,13 @@
+numpy
+matplotlib
+torch>=1.5.0
+torchvision>=0.6.0
+IPython
+scikit-learn
+tifffile
+tqdm
+statsmodels
+opencv-contrib-python-headless
+gudhi
+Pillow
+matplotlib

@@ -1,0 +1,9 @@
+m2r2
+sphinx
+sphinx_bootstrap_theme
+pylint
+pytest
+pytest-cov
+sphinx-argparse
+recommonmark
+gudhi

@@ -1,0 +1,5 @@
+#!/usr/bin/env python
+import defect_detection
+
+if __name__ == "__main__":
+    defect_detection.train._run_cli()
