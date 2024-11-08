@@ -149,6 +149,17 @@ Script to create plots to compare ripley results
 
 >input: root directory with output from running bsn_paper_metrics.py<br>
 >output: plots and csv files with radius above and below the 99% thresholds<br>
+## Open-source licenses
+
+Below are the licences and copyright notices of the code we included:
+- PyTorch SegNet: [https://github.com/say4n/pytorch-segnet/tree/master?tab=MIT-1-ov-file](https://github.com/say4n/pytorch-segnet/tree/master?tab=MIT-1-ov-file)
+- PyTorch Multi-Class Focal Loss: [https://github.com/AdeelH/pytorch-multi-class-focal-loss?tab=MIT-1-ov-file](https://github.com/AdeelH/pytorch-multi-class-focal-loss?tab=MIT-1-ov-file)
+- TopoLoss: [https://github.com/HuXiaoling/TopoLoss?tab=MIT-1-ov-file](https://github.com/HuXiaoling/TopoLoss?tab=MIT-1-ov-file)
+- Astropy: [https://github.com/astropy/astropy?tab=BSD-3-Clause-1-ov-file#readme](https://github.com/astropy/astropy?tab=BSD-3-Clause-1-ov-file#readme)
+- Spatstat: [https://rdrr.io/cran/spatstat/man/spatstat-package.html](https://rdrr.io/cran/spatstat/man/spatstat-package.html)
+- PyTorch UNet SegNet: [https://github.com/trypag/pytorch-unet-segnet/tree/master?tab=MIT-1-ov-file](https://github.com/trypag/pytorch-unet-segnet/tree/master?tab=MIT-1-ov-file)
+- PyTorch-SemSeg: [https://github.com/meetps/pytorch-semseg/tree/master?tab=MIT-1-ov-file](https://github.com/meetps/pytorch-semseg/tree/master?tab=MIT-1-ov-file)
+
 
 ## License
 
