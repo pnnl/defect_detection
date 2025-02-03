@@ -42,7 +42,7 @@ pip install torch==1.10.1+cu111 torchvision==0.11.2+cu111 -f https://download.py
 
 ### Download files/images
 
-Download the model weights and move the model weights file segnet_lr1e-04_unirradiated_Adam_new_augmentation_EWCE_5class_model_weights.pt to:
+Download or train (see below) to create a model weight and move the model weight file (in the notebook called "segnet_lr1e-04_unirradiated_Adam_new_augmentation_EWCE_5class_model_weights.pt") to:
 ```
 defect_detection/notebooks/data/Best_Models/
 ```
