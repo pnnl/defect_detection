@@ -27,8 +27,8 @@ Area = matrix(c(
 
 conditions = c( "Unirradiated", "Irradiated")
 
-output_dir ='/Users/oost464/Library/CloudStorage/OneDrive-PNNL/Desktop/projects/tritium/defect_detection/images_paper/'
-location_files = '/Volumes/TTP_NeuralNet/Results/new_results_sep24'
+output_dir ='/Users/oost464/Local_Project/defect_detection/images_paper'
+location_files = '/Volumes/ttp_neuralnet/Results/data_to_share/public_repo/public_repo'
 scl = c(imu0,imu1, imi0,imi1,imi2)
 pdens = apply(Area, 1, prod)
 
@@ -40,7 +40,7 @@ return_df <- function(){
   df = NULL
   for(i in conditions){
     if (i== "Unirradiated") {
-      model = 'segnet'
+      model = 'smallbayessegnet'
       opt = 'Adam'
       loss = 'EWCE'
     } else {
@@ -137,7 +137,8 @@ return_df <- function(){
   pvals$pvalue <- NA
   for(p in unique(dfp$Pred)){
     for(d in unique(dfp$Defect)){
-      test = dfp[(dfp$Type=='onboundary')&(dfp$Defect==d)&(dfp$Pred==p),]
+      for(x in unique(dfp$Condition)){}
+      test = dfp[(dfp$Type=='onboundary')&(dfp$Defect==d)&(dfp$Pred==p)&(dfp$Condition==x),]
       res = prop.test(test$n, test$N) 
       pvals$pvalue[(pvals$Defect==d & pvals$Pred==p)] = res$p.value
     }
@@ -187,7 +188,8 @@ return_df <- function(){
     geom_errorbar(aes(ymax=p+SE, ymin=p-SE), position = "identity", 
                   size=1.5, width = .4, color='magenta') + 
     scale_fill_viridis_d() + 
-    scale_y_continuous(labels = function(x) paste0(x*100, "%")) 
+    scale_y_continuous(labels = function(x) paste0(x*100, "%")) +
+    geom_hline(yintercept = 0.5, linetype="dashed", color = "black") 
   ggsave( paste0(output_dir, '_propotion_grain_plot_truth', file_name, '.pdf'), propotion_grain_plot)
   
 }
