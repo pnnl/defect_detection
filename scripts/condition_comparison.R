@@ -23,7 +23,7 @@ Area = matrix(c(
   338, 1698,  #image 2 - irradiated (1698, 338, 3)
   480, 1698,  #image 3 - irradiated (1698, 480, 3)
   512, 1768),  #image 4 - irradiated  (1768, 512, 3)
-        ncol=2, byrow=T)
+  ncol=2, byrow=T)
 
 conditions = c( "Unirradiated", "Irradiated")
 
@@ -52,7 +52,7 @@ return_df <- function(){
     folder = paste0(model, '_lr1e-04_',tolower(i),'_',opt,'_new_augmentation_', loss, '_5')
     filename = paste0('_qfs_projects_tritium_', tolower(i), '_',model, '_lr1e-04_',tolower(i),'_',opt,'_new_augmentation_', loss, '_5_table_defects', '.csv')
     filename_truth = paste0('_qfs_projects_tritium_', tolower(i), '_',model, '_lr1e-04_',tolower(i),'_',opt,'_new_augmentation_', loss, '_5_table_defects', '_truth.csv')
-
+    
     defects = read.csv(paste(location_files,i,folder,filename, sep="/"), header=F)
     View(defects)
     
@@ -62,7 +62,7 @@ return_df <- function(){
     
     defects_truth = read.csv(paste(location_files,i,folder,filename_truth, sep="/"), header=F)
     colnames(defects_truth) = defects_truth[1,]
-
+    
     defects_truth$Pred = "Truth"
     defects = rbind(defects, defects_truth)
     
@@ -72,7 +72,7 @@ return_df <- function(){
     defects$on_boundary = as.numeric(defects$on_boundary)
     defects$Condition = i
     defects = defects[which(!is.na(defects$x)),]
-
+    
     defects$filenames <-replace(defects$filenames, defects$filenames=='TTP_C13-PA-PHYS-THK-121_LV_5kv_PC16_WD4.6_20Pa_2kx-A-2.tif', 1)
     defects$filenames <-replace(defects$filenames, defects$filenames=='TTP_C13-PA-PHYS-THK-121_LV_5kv_PC16_WD4.6_20Pa_2kx-B.tif', 2)
     defects$filenames <-replace(defects$filenames, defects$filenames=="TTP_SEM10696_C13-1-2-2-P12_005_cropped.tif", 3)
@@ -86,7 +86,7 @@ return_df <- function(){
     
     View(defects)
     file_name = paste0('_', tolower(i), '_',model, '_lr1e-04_', opt,'_new_augmentation_', loss, file_name)
-
+    
   }
   df = df[which(!is.na(df$y)),]
   df = df[which(df$Area >alim_um), ]
@@ -110,7 +110,7 @@ return_df <- function(){
   drops <- c("scale")
   round_dfa = round_dfa[ , !(names(round_dfa) %in% drops)]
   write.csv( round_dfa,  paste0(output_dir, '_average_area_density', file_name, '.csv'), row.names=FALSE)
-
+  
   
   dfs = df %>% 
     group_by(Condition, Defect, Type, Pred) %>%
@@ -120,34 +120,34 @@ return_df <- function(){
   dft = dfs %>% 
     group_by(Condition, Defect, Pred) %>%
     summarise(N = sum(n))
-
+  
   dfp = merge(dfs, dft, by=c('Condition','Defect', 'Pred'))
   dfp$p = dfp$n/dfp$N
   dfp$SE = qnorm(.975)*sqrt(dfp$p*(1-dfp$p)/dfp$N)
   dfp$Condition <- factor(dfp$Condition, levels=c("Unirradiated",'Irradiated'))
-
- 
+  
+  
   
   
   #########################
   ### Statistical Tests ###
   
-  pvals = unique(dfp[c("Defect", "Pred")])
+  pvals = unique(dfp[c("Defect", "Pred", "Condition")])
 
   pvals$pvalue <- NA
   for(p in unique(dfp$Pred)){
     for(d in unique(dfp$Defect)){
-      for(x in unique(dfp$Condition)){}
+      for(x in unique(dfp$Condition)){
       test = dfp[(dfp$Type=='onboundary')&(dfp$Defect==d)&(dfp$Pred==p)&(dfp$Condition==x),]
+
       res = prop.test(test$n, test$N) 
-      pvals$pvalue[(pvals$Defect==d & pvals$Pred==p)] = res$p.value
+      pvals$pvalue[(pvals$Defect==d & pvals$Pred==p & pvals$Condition==x)] = res$p.value}
     }
   }
+ 
   pvals$Significant = factor(pvals$pvalue < .05, levels=c(FALSE,TRUE))
-
   
-  dff = merge(dfp, pvals, by=c('Defect', 'Pred'))
-
+  dff = merge(dfp, pvals, by=c('Defect', 'Pred', 'Condition'))
   
   round_dff = dff %>% mutate_if(is.numeric, round, digits=3)
   write.csv(round_dff,  paste0(output_dir, '_onboundary_', file_name, '.csv'), row.names=FALSE)
