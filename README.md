@@ -72,7 +72,7 @@ Script to train<br>
 
 The combination of parameters can be set by editing the list of models, optimizers (opts), and loss weights (losses) within the python script. The folder of images should be set within the train script under under variable 'folder'
 
-The training images should include a corresponding labeled image with "Labeled " added to the start of the file name
+The training images should include a corresponding labeled image with "Labeled " added to the start of the file name. Update the regex in the 'filename' argument in the defect_detection.train.Trainer class setup from filename='TTP*.tif' to match your naming. 
 
 
 
@@ -83,7 +83,7 @@ If you have access to a trained segmentation model, and you'd like to generate a
 [Performance Metrics Script](scripts/bsn_paper_metrics.py). If you'd like to calibrate the images, use
 [Calibration Script](scripts/bsn_calibrate_paper.py).
 
-The images should include a corresponding labeled image with "Labeled " added to the start of the file name
+The images should include a corresponding labeled image with "Labeled " added to the start of the file name. Update the regex in the 'filename' argument in the defect_detection.train.Trainer class setup from filename='TTP*.tif' to match your naming. 
 
 For both: <br>
 ``` 
