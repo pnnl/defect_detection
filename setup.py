@@ -27,7 +27,7 @@ setup(
         "IPython==8.14.0",
         "statsmodels==0.13.1",
         "opencv-contrib-python-headless==4.5.4.60",
-        "gudhi==3.5.0",
+        "gudhi==3.7.0",
         "Pillow==9.2.0",
         "pytest==8.3.3",
         "comm>=0.1.1"
