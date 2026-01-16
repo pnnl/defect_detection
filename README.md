@@ -83,6 +83,8 @@ If you have access to a trained segmentation model, and you'd like to generate a
 [Performance Metrics Script](scripts/bsn_paper_metrics.py). If you'd like to calibrate the images, use
 [Calibration Script](scripts/bsn_calibrate_paper.py).
 
+The images should include a corresponding labeled image with "Labeled " added to the start of the file name
+
 For both: <br>
 ``` 
    python bsn_paper_metrics.py combo_num save_folder model_path
