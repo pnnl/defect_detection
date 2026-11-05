@@ -19,7 +19,7 @@ setup(
         "pandas==1.4.3",
         "numpy==1.26.4",
         "matplotlib==3.9.0",
-        "torch==1.10.1",
+        "torch==2.13.0",
         "torchvision==0.11.2",
         "scikit-learn==1.1.1",
         "tifffile==2024.4.18",
